@@ -32,6 +32,8 @@ TEST(StringNumTests, ADD_CHANGE_SIGN_MORE_THAN_TEN) {
 }
 
 TEST(StringNumTests, ADD_CHANGE_SIGN_NEW_DOZEN) {
-    StringNum number = StringNum(std::string("-10"));
-    ASSERT_EQ((number + 10).toString(), StringNum("0").toString());
+    StringNum number = StringNum(std::string("-6"));
+    StringNum result = number + 6;
+
+    ASSERT_EQ((number + 6).toString(), StringNum("0").toString());
 }

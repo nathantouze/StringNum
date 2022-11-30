@@ -1,9 +1,14 @@
 #include "../../include/StringNum.hpp"
 #include <stdexcept>
+#include <iostream>
 
 StringNum StringNum::operator+(const StringNum &other) const {
 
-    return StringNum(*this + other.toString());
+    StringNum ret = *this + other.toString();
+    if (ret.toString() == "") {
+        ret.assign("0");
+    }
+    return ret;
 }
 
 StringNum StringNum::operator+(const std::string &other) const {
@@ -17,17 +22,17 @@ StringNum StringNum::operator+(const std::string &other) const {
     }
 
     // Special cases
-    if (!isNegative() && isNegative(other) && firstBigger(_numberStr, other.substr(1))) { // 5 + -3
+    if (!isNegative() && isNegative(other) && firstBiggerOrEqual(_numberStr, other.substr(1))) { // 5 + -3
         return StringNum(*this - other.substr(1));
-    } else if (!isNegative() && isNegative(other) && !firstBigger(_numberStr, other.substr(1))) { // 3 + -5
+    } else if (!isNegative() && isNegative(other) && !firstBiggerOrEqual(_numberStr, other.substr(1))) { // 3 + -5
         StringNum ret = StringNum(other.substr(1)) - *this;
         ret.setNegative(true);
         return ret;
-    } else if (isNegative() && !isNegative(other) && firstBigger(_numberStr.substr(1), other)) { // -5 + 3
+    } else if (isNegative() && !isNegative(other) && firstBiggerOrEqual(_numberStr.substr(1), other)) { // -5 + 3
         StringNum ret = StringNum(_numberStr.substr(1)) - StringNum(other);
         ret.setNegative(true);
         return ret;
-    } else if (isNegative() && !isNegative(other) && !firstBigger( _numberStr.substr(1), other)) { // -3 + 5
+    } else if (isNegative() && !isNegative(other) && !firstBiggerOrEqual( _numberStr.substr(1), other)) { // -3 + 5
         return StringNum(other) - StringNum(_numberStr.substr(1));
     } else if (isNegative() && isNegative(other)) { // -3 + -5
         StringNum ret = StringNum(_numberStr.substr(1)) + StringNum(other.substr(1));
@@ -57,33 +62,58 @@ StringNum StringNum::operator+(const std::string &other) const {
         tmp.append(std::to_string(toAdd));
     }
     std::reverse(tmp.begin(), tmp.end());
-    if (tmp == "-0") {
+    if (tmp == "-0" || tmp == "") {
         tmp = "0";
     }
-    return StringNum(tmp);
+    StringNum ret = tmp;
+    return ret;
 }
 
 
 StringNum StringNum::operator+(const short &other) const {
-    return *this + std::to_string(other);
+    StringNum ret = *this + std::to_string(other);
+    if (ret.toString() == "") {
+        ret.assign("0");
+    }
+    return ret;
 }
 
 StringNum StringNum::operator+(const int &other) const {
-    return *this + std::to_string(other);
+    StringNum ret = *this + std::to_string(other);
+    if (ret.toString() == "") {
+        ret.assign("0");
+    }
+    return ret;
 }
 
-StringNum StringNum::operator+(const unsigned int &other) const {
-    return *this + std::to_string(other);
+StringNum StringNum::operator+(const unsigned int &other) const {    
+    StringNum ret = *this + std::to_string(other);
+    if (ret.toString() == "") {
+        ret.assign("0");
+    }
+    return ret;
 }
 
 StringNum StringNum::operator+(const long &other) const {
-    return *this + std::to_string(other);
+    StringNum ret = *this + std::to_string(other);
+    if (ret.toString() == "") {
+        ret.assign("0");
+    }
+    return ret;
 }
 
 StringNum StringNum::operator+(const long long int &other) const {
-    return *this + std::to_string(other);
+    StringNum ret = *this + std::to_string(other);
+    if (ret.toString() == "") {
+        ret.assign("0");
+    }
+    return ret;
 }
 
 StringNum StringNum::operator+(const unsigned long long int &other) const {
-    return *this + std::to_string(other);
+    StringNum ret = *this + std::to_string(other);
+    if (ret.toString() == "") {
+        ret.assign("0");
+    }
+    return ret;
 }

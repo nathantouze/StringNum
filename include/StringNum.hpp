@@ -88,7 +88,7 @@ class StringNum {
     private:
         void updateOutOfRange();
         bool isValidString(const std::string &number) const;
-        bool firstBigger(const std::string &first, const std::string &second) const;
+        bool firstBiggerOrEqual(const std::string &first, const std::string &second) const;
         std::string _numberStr;
         unsigned long long int _numberLong;
         bool _outOfRange;

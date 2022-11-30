@@ -23,7 +23,7 @@ void StringNum::setNegative(bool negative) {
 /*
     The two strings must be correct positive numbers (no minus sign, no leading zeros)
 */
-bool StringNum::firstBigger(const std::string &first, const std::string &second) const {
+bool StringNum::firstBiggerOrEqual(const std::string &first, const std::string &second) const {
     
     if (!isValidString(first) || !isValidString(second) || isNegative(first) || isNegative(second)) {
         throw std::invalid_argument("The two strings must be correct positive numbers (no minus sign, no leading zeros)");
@@ -40,7 +40,7 @@ bool StringNum::firstBigger(const std::string &first, const std::string &second)
                 return false;
         }
     }
-    return false;
+    return true;
 }
 
 
@@ -233,19 +233,18 @@ const bool &StringNum::isOutOfRange() const {
     return _outOfRange;
 }
 
-StringNum::StringNum(const unsigned long long int &number) : _numberLong(number)
+StringNum::StringNum(const unsigned long long int &number)
 {
-    _numberStr = _numberLong;
+    assign(number);
     updateOutOfRange();
 }
 
-StringNum::StringNum(const std::string &number) : _numberStr(number)
+StringNum::StringNum(const std::string &number)
 {
     if (!isValidString(number)) {
         throw std::invalid_argument("\"" + number + "\" is not a valid string number");
     }
-    std::istringstream in(_numberStr);
-    in >> _numberLong;
+    assign(number);
     updateOutOfRange();
 }
 
