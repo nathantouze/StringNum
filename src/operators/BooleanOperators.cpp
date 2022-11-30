@@ -1,4 +1,4 @@
-#include "StringNum.hpp"
+#include "../../include/StringNum.hpp"
 #include <stdexcept>
 
 
@@ -26,14 +26,6 @@ bool StringNum::operator>=(const std::string &other) const {
     }
 }
 
-bool StringNum::operator>=(const unsigned long long int &other) const {
-    return this->_numberLong >= other;
-}
-
-bool StringNum::operator>=(const std::string &other) const {
-    return this->_numberStr >= other;
-}
-
 bool StringNum::operator>(const unsigned long long int &other) const {
     
     if (isOutOfRange()) {
@@ -45,7 +37,7 @@ bool StringNum::operator>(const unsigned long long int &other) const {
 bool StringNum::operator>(const std::string &other) const {
 
     if (!isValidString(other)) {
-        throw std::invalid_argument("Invalid argument: the argument is not a valid number.");
+        throw std::invalid_argument("\"" + other + "\" is not a valid string number");
     }
     if (this->isNegative() && !isNegative(other)) {
         return false;
@@ -161,7 +153,7 @@ bool StringNum::operator<(const unsigned long long int &other) const {
 bool StringNum::operator<(const std::string &other) const {
     
     if (!isValidString(other)) {
-        throw std::invalid_argument("Invalid argument: the argument is not a valid number.");
+        throw std::invalid_argument("\"" + other + "\" is not a valid string number");
     }
     if (this->isNegative() && !isNegative(other)) {
         return true;
@@ -252,7 +244,7 @@ bool StringNum::operator==(const unsigned long long int &other) const {
 bool StringNum::operator==(const std::string &other) const {
     
     if (!isValidString(other)) {
-        throw std::invalid_argument("Invalid argument: the argument is not a valid number.");
+        throw std::invalid_argument("\"" + other + "\" is not a valid string number");
     }
     return _numberStr == other;
 }
@@ -273,7 +265,7 @@ bool StringNum::operator!=(const unsigned long long int &other) const {
 bool StringNum::operator!=(const std::string &other) const {
     
     if (!isValidString(other)) {
-        throw std::invalid_argument("Invalid argument: the argument is not a valid number.");
+        throw std::invalid_argument("\"" + other + "\" is not a valid string number");
     }
     return _numberStr != other;
 }

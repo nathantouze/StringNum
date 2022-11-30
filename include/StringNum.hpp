@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2022
-** Syracuse
+** 2022
+** StringNum.hpp
 ** File description:
 ** StringNum
 */
@@ -16,7 +16,7 @@ class StringNum {
         StringNum(const unsigned long long int &number);
         ~StringNum();
 
-
+        void setNegative(bool negative);
         bool isNegative(const std::string &number) const;
         bool isNegative() const;
         bool isEven() const;
@@ -56,12 +56,22 @@ class StringNum {
         bool operator!=(const std::string &other) const;
 
         StringNum operator+(const StringNum &other) const;
-        StringNum operator+(const unsigned long long int &other) const;
         StringNum operator+(const std::string &other) const;
+        StringNum operator+(const short &other) const;
+        StringNum operator+(const int &other) const;
+        StringNum operator+(const unsigned int &other) const;
+        StringNum operator+(const long &other) const;
+        StringNum operator+(const long long int &other) const;
+        StringNum operator+(const unsigned long long int &other) const;
 
         StringNum operator-(const StringNum &other) const;
-        StringNum operator-(const unsigned long long int &other) const;
         StringNum operator-(const std::string &other) const;
+        StringNum operator-(const short &other) const;
+        StringNum operator-(const int &other) const;
+        StringNum operator-(const unsigned int &other) const;
+        StringNum operator-(const long &other) const;
+        StringNum operator-(const long long int &other) const;
+        StringNum operator-(const unsigned long long int &other) const;
 
         StringNum operator*(const StringNum &other) const;
         StringNum operator*(const unsigned long long int &other) const;
@@ -78,6 +88,7 @@ class StringNum {
     private:
         void updateOutOfRange();
         bool isValidString(const std::string &number) const;
+        bool firstBigger(const std::string &first, const std::string &second) const;
         std::string _numberStr;
         unsigned long long int _numberLong;
         bool _outOfRange;

@@ -1,15 +1,61 @@
-#include "StringNum.hpp"
+#include "../include/StringNum.hpp"
 #include <sstream>
 #include <algorithm>
 #include <iostream>
 
 
+/*
+    Set new sign to the number
+*/
+void StringNum::setNegative(bool negative) {
+    if (isNegative() != negative) {
+        if (negative && _numberStr != "0") {
+            _numberStr = "-" + _numberStr;
+        } else {
+            _numberStr = _numberStr.substr(1);
+        }
+        if (!isOutOfRange()) {
+            _numberLong = -_numberLong;
+        }
+    }
+}
+
+/*
+    The two strings must be correct positive numbers (no minus sign, no leading zeros)
+*/
+bool StringNum::firstBigger(const std::string &first, const std::string &second) const {
+    
+    if (!isValidString(first) || !isValidString(second) || isNegative(first) || isNegative(second)) {
+        throw std::invalid_argument("The two strings must be correct positive numbers (no minus sign, no leading zeros)");
+    }
+    if (first.size() > second.size())
+        return true;
+    else if (first.size() < second.size())
+        return false;
+    else {
+        for (size_t i = 0; i < first.size(); i++) {
+            if (first[i] > second[i])
+                return true;
+            else if (first[i] < second[i])
+                return false;
+        }
+    }
+    return false;
+}
+
+
 bool StringNum::isValidString(const std::string &number) const {
-    if (number.length() == 0)
+    if (number.length() == 0 || (number.length() == 1 && number[0] == '-')) {
         return false;
-    if (number[0] == '-')
+    }
+    int i = 0;
+    if (number[0] == '-') {
+        i = 1;
+    }
+    if (number[i] == '0' && number.length() > 1) {
         return false;
-    for (int i = 0; i < number.length(); i++) {
+    }
+    for (; i < number.length(); i++) {
         if (number[i] < '0' || number[i] > '9')
             return false;
     }
@@ -195,6 +241,9 @@ StringNum::StringNum(const unsigned long long int &number) : _numberLong(number)
 
 StringNum::StringNum(const std::string &number) : _numberStr(number)
 {
+    if (!isValidString(number)) {
+        throw std::invalid_argument("\"" + number + "\" is not a valid string number");
+    }
     std::istringstream in(_numberStr);
     in >> _numberLong;
     updateOutOfRange();
