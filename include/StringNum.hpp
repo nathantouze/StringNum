@@ -74,8 +74,13 @@ class StringNum {
         StringNum operator-(const unsigned long long int &other) const;
 
         StringNum operator*(const StringNum &other) const;
-        StringNum operator*(const unsigned long long int &other) const;
         StringNum operator*(const std::string &other) const;
+        StringNum operator*(const short &other) const;
+        StringNum operator*(const int &other) const;
+        StringNum operator*(const unsigned int &other) const;
+        StringNum operator*(const long &other) const;
+        StringNum operator*(const long long int &other) const;
+        StringNum operator*(const unsigned long long int &other) const;
 
         StringNum operator/(const StringNum &other) const;
         StringNum operator/(const unsigned long long int &other) const;

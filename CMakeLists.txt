@@ -23,6 +23,7 @@ set(Sources
     src/operators/BooleanOperators.cpp
     src/operators/Plus.cpp
     src/operators/Minus.cpp
+    src/operators/Multiply.cpp
 )
 
 add_library(${This} STATIC ${Sources} ${Headers})

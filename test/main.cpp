@@ -78,3 +78,48 @@ TEST(StringNumTests, SUB_CHANGE_NEW_DIGIT_SIGN) {
     StringNum number = std::string("-1");
     ASSERT_EQ((number - (-16)).toString(), StringNum("15").toString());
 }
+
+TEST(StringNumTests, MUL_SIMPLE) {
+    StringNum number = 8;
+    ASSERT_EQ((number * 2).toString(), StringNum("16").toString());
+}
+
+TEST(StringNumTests, MUL_ONE_POS) {
+    StringNum number = 987652123456;
+    ASSERT_EQ((number * 1).toString(), StringNum("987652123456").toString());
+}
+
+TEST(StringNumTests, MUL_ONE_NEG) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number * -1).toString(), StringNum("-23986345").toString());
+}
+
+TEST(StringNumTests, MUL_ZERO) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number * 0).toString(), StringNum("0").toString());
+}
+
+TEST(StringNumTests, MUL_MORE_THAN_TEN) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number * 11).toString(), StringNum("263150395").toString());
+}
+
+TEST(StringNumTests, MUL_NEW_DOZEN) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number * 10).toString(), StringNum("239863450").toString());
+}
+
+TEST(StringNumTests, MUL_FIRST_NEG) {
+    StringNum number = -23986345;
+    ASSERT_EQ((number * 10).toString(), StringNum("-239863450").toString());
+}
+
+TEST(StringNumTests, MUL_SECOND_NEG) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number * -10).toString(), StringNum("-239863450").toString());
+}
+
+TEST(StringNumTests, MUL_BOTH_NEG) {
+    StringNum number = -23986345;
+    ASSERT_EQ((number * -10).toString(), StringNum("239863450").toString());
+}
