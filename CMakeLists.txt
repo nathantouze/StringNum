@@ -22,6 +22,7 @@ set(Sources
     src/StringNum.cpp
     src/operators/BooleanOperators.cpp
     src/operators/Plus.cpp
+    src/operators/PlusPlus.cpp
     src/operators/Minus.cpp
     src/operators/Multiply.cpp
 )

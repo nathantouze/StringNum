@@ -55,6 +55,8 @@ class StringNum {
         bool operator!=(const unsigned long long int &other) const;
         bool operator!=(const std::string &other) const;
 
+        void operator++(int);
+
         StringNum operator+(const StringNum &other) const;
         StringNum operator+(const std::string &other) const;
         StringNum operator+(const short &other) const;

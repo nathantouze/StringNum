@@ -1,6 +1,7 @@
 #include "../../include/StringNum.hpp"
 #include <stdexcept>
 #include <algorithm>
+#include <iostream>
 
 
 StringNum StringNum::operator*(const StringNum &other) const {
@@ -36,26 +37,17 @@ StringNum StringNum::operator*(const std::string &other) const {
     }
 
     // Normal cases
-    int toAdd = 0;
-    std::string tmp = this->_numberStr;
-    std::string otherRev = other;
-    std::reverse(otherRev.begin(), otherRev.end());
-    std::reverse(tmp.begin(), tmp.end());
+    StringNum tmp = _numberStr;
 
-    for (unsigned int i = 0; i < otherRev.length(); i++) {
-        for (unsigned int j = 0; j < tmp.length(); j++) {
-            int tmpInt = std::stoi(tmp.substr(j, 1)) * std::stoi(otherRev.substr(i, 1)) + toAdd;
-            toAdd = (tmpInt - tmpInt % 10) / 10;
-            tmp.replace(j, 1, std::to_string(tmpInt % 10));
-        }
-        if (toAdd != 0) {
-            tmp.append(std::to_string(toAdd));
-            toAdd = 0;
-        }
-        tmp.append(std::string(i, '0'));
+    std::cout << "tmp init: " << _numberStr << std::endl;
+    std::cout << "other: " << other << std::endl;
+    for (StringNum i = 0; i < other; i++) {
+        tmp = tmp + tmp;
+        std::string lol = tmp.toString();
+        std::cout << "tmp: " << lol << std::endl;
+        std::cout << "i: " << i.toString() << std::endl;
     }
-    std::reverse(tmp.begin(), tmp.end());
-    return StringNum(tmp);
+    return tmp;
 }
 
 StringNum StringNum::operator*(const short &other) const {
