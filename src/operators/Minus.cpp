@@ -1,6 +1,8 @@
 #include "../../include/StringNum.hpp"
 #include <stdexcept>
 #include <iostream>
+#include <algorithm>
+
 
 StringNum StringNum::operator-(const StringNum &other) const {
     return StringNum(*this - other.toString());
@@ -22,11 +24,11 @@ StringNum StringNum::operator-(const std::string &other) const {
         StringNum ret = StringNum(other) + _numberStr.substr(1);
         ret.setNegative(true);
         return ret;
-    } else if (isNegative() && isNegative(other) && firstBiggerOrEqual(_numberStr, other)) { // -5 - -3
+    } else if (isNegative() && isNegative(other) && firstBiggerOrEqual(_numberStr.substr(1), other.substr(1))) { // -5 - -3
         StringNum ret = StringNum(other.substr(1)) - _numberStr.substr(1);
         ret.setNegative(true);
         return ret;
-    } else if (isNegative() && isNegative(other) && !firstBiggerOrEqual(_numberStr, other)) { // -3 - -5
+    } else if (isNegative() && isNegative(other) && !firstBiggerOrEqual(_numberStr.substr(1), other.substr(1))) { // -3 - -5
         return StringNum(other.substr(1)) - _numberStr.substr(1);
     } else if (!firstBiggerOrEqual(_numberStr, other)) { // 3 - 5
         StringNum ret = StringNum(other) - _numberStr;

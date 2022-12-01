@@ -37,3 +37,44 @@ TEST(StringNumTests, ADD_CHANGE_SIGN_NEW_DOZEN) {
 
     ASSERT_EQ((number + 6).toString(), StringNum("0").toString());
 }
+
+TEST(StringNumTests, SUB_SIMPLE) {
+    StringNum number = std::string("123456");
+    ASSERT_EQ((number - 1).toString(), StringNum("123455").toString());
+}
+
+TEST(StringNumTests, SUB_MORE_THAN_TEN) {
+    StringNum number = std::string("123456");
+    ASSERT_EQ((number - 11).toString(), StringNum("123445").toString());
+}
+
+TEST(StringNumTests, SUB_NEW_DOZEN) {
+    StringNum number = std::string("123450");
+    ASSERT_EQ((number - 10).toString(), StringNum("123440").toString());
+}
+
+TEST(StringNumTests, SUB_NEW_DIGIT) {
+    StringNum number = std::string("-1");
+    ASSERT_EQ((number - 16).toString(), StringNum("-17").toString());
+}
+
+TEST(StringNumTests, SUB_CHANGE_SIMPLE_SIGN) {
+    StringNum number = std::string("-1");
+    ASSERT_EQ((number - (-2)).toString(), StringNum("1").toString());
+}
+
+TEST(StringNumTests, SUB_CHANGE_MORE_THAN_TEN_SIGN) {
+    StringNum number = std::string("-10");
+    ASSERT_EQ((number - (-2)).toString(), StringNum("-8").toString());
+}
+
+TEST(StringNumTests, SUB_CHANGE_NEW_DOZEN_SIGN) {
+    StringNum number = std::string("-6");
+    StringNum result = number - (-6);
+    ASSERT_EQ((number - (-6)).toString(), StringNum("0").toString());
+}
+
+TEST(StringNumTests, SUB_CHANGE_NEW_DIGIT_SIGN) {
+    StringNum number = std::string("-1");
+    ASSERT_EQ((number - (-16)).toString(), StringNum("15").toString());
+}

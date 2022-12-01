@@ -1,6 +1,8 @@
 #include "../../include/StringNum.hpp"
 #include <stdexcept>
 #include <iostream>
+#include <algorithm>
+
 
 StringNum StringNum::operator+(const StringNum &other) const {
 

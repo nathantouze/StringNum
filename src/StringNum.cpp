@@ -11,7 +11,10 @@ void StringNum::setNegative(bool negative) {
     if (isNegative() != negative) {
         if (negative && _numberStr != "0") {
             _numberStr = "-" + _numberStr;
-        } else {
+        } else if (_numberStr == "0") {
+            return;
+        } 
+        else {
             _numberStr = _numberStr.substr(1);
         }
         if (!isOutOfRange()) {
@@ -236,6 +239,9 @@ const bool &StringNum::isOutOfRange() const {
 StringNum::StringNum(const unsigned long long int &number)
 {
     assign(number);
+    if (_numberStr == "") {
+        _numberStr = "0";
+    }
     updateOutOfRange();
 }
 
@@ -245,6 +251,9 @@ StringNum::StringNum(const std::string &number)
         throw std::invalid_argument("\"" + number + "\" is not a valid string number");
     }
     assign(number);
+    if (_numberStr == "") {
+        _numberStr = "0";
+    }
     updateOutOfRange();
 }
 
