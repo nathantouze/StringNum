@@ -38,14 +38,10 @@ StringNum StringNum::operator*(const std::string &other) const {
 
     // Normal cases
     StringNum tmp = _numberStr;
+    StringNum save = _numberStr;
 
-    std::cout << "tmp init: " << _numberStr << std::endl;
-    std::cout << "other: " << other << std::endl;
-    for (StringNum i = 0; i < other; i++) {
-        tmp = tmp + tmp;
-        std::string lol = tmp.toString();
-        std::cout << "tmp: " << lol << std::endl;
-        std::cout << "i: " << i.toString() << std::endl;
+    for (StringNum i = 1; i < other; i++) {
+        tmp = tmp + save;
     }
     return tmp;
 }

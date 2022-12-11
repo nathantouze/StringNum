@@ -14,6 +14,8 @@ class StringNum {
     public:
         StringNum(const std::string &number);
         StringNum(const unsigned long long int &number);
+        StringNum(const long long int &number);
+        StringNum(const int &number);
         ~StringNum();
 
         void setNegative(bool negative);
@@ -23,6 +25,7 @@ class StringNum {
         const std::string &toString() const;
         const unsigned long long int &toLong() const;
         void assign(const unsigned long long int &number);
+        void assign(const long long int &number);
         void assign(const std::string &number);
         void multiply(const int &product);
         void add(const int &num);
@@ -85,8 +88,13 @@ class StringNum {
         StringNum operator*(const unsigned long long int &other) const;
 
         StringNum operator/(const StringNum &other) const;
-        StringNum operator/(const unsigned long long int &other) const;
         StringNum operator/(const std::string &other) const;
+        StringNum operator/(const short &other) const;
+        StringNum operator/(const int &other) const;
+        StringNum operator/(const unsigned int &other) const;
+        StringNum operator/(const long &other) const;
+        StringNum operator/(const long long int &other) const;
+        StringNum operator/(const unsigned long long int &other) const;
         
         
 
@@ -97,7 +105,7 @@ class StringNum {
         bool isValidString(const std::string &number) const;
         bool firstBiggerOrEqual(const std::string &first, const std::string &second) const;
         std::string _numberStr;
-        unsigned long long int _numberLong;
+        long long int _numberLong;
         bool _outOfRange;
 };
 

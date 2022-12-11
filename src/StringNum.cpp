@@ -197,6 +197,12 @@ void StringNum::multiply(const int &product) {
     assign(newVal);
 }
 
+void StringNum::assign(const long long int &number) {
+    _numberLong = number;
+    _numberStr = std::to_string(number);
+    updateOutOfRange();
+}
+
 void StringNum::assign(const unsigned long long int &number) {
     _numberLong = number;
     _numberStr = std::to_string(number);
@@ -234,6 +240,25 @@ void StringNum::updateOutOfRange() {
 
 const bool &StringNum::isOutOfRange() const {
     return _outOfRange;
+}
+
+
+StringNum::StringNum(const int &number) 
+{
+    assign(long long int (number));
+    if (_numberStr == "") {
+        _numberStr = "0";
+    }
+    updateOutOfRange();
+}
+
+StringNum::StringNum(const long long int &number) 
+{
+    assign(number);
+    if (_numberStr == "") {
+        _numberStr = "0";
+    }
+    updateOutOfRange();
 }
 
 StringNum::StringNum(const unsigned long long int &number)

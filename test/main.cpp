@@ -16,6 +16,11 @@ TEST(StringNumTests, ADD_NEW_DOZEN) {
     ASSERT_EQ((number + 10).toString(), StringNum("20").toString());
 }
 
+TEST(StringNumTests, ADD_NEW_DOZEN_HARD) {
+    StringNum number = StringNum(std::string("222"));
+    ASSERT_EQ((number + 78).toString(), StringNum("300").toString());
+}
+
 TEST(StringNumTests, ADD_NEW_DIGIT) {
     StringNum number = StringNum(std::string("9"));
     ASSERT_EQ((number + 2).toString(), StringNum("11").toString());
@@ -101,7 +106,7 @@ TEST(StringNumTests, MUL_ZERO) {
 
 TEST(StringNumTests, MUL_MORE_THAN_TEN) {
     StringNum number = 23986345;
-    ASSERT_EQ((number * 11).toString(), StringNum("263150395").toString());
+    ASSERT_EQ((number * 11).toString(), StringNum("263849795").toString());
 }
 
 TEST(StringNumTests, MUL_NEW_DOZEN) {

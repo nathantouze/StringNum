@@ -60,6 +60,10 @@ StringNum StringNum::operator+(const std::string &other) const {
         toAdd = (tmpInt - tmpInt % 10) / 10;
         tmp.replace(i, 1, std::to_string(tmpInt % 10));
     }
+    if (toAdd != 0 && tmp.length() > otherRev.length()) {
+        tmp.replace(otherRev.length(), 1, std::to_string(std::stoi(tmp.substr(otherRev.length(), 1)) + toAdd));
+        toAdd = 0;
+    }
     if (toAdd != 0 && tmp.length() == otherRev.length()) {
         tmp.append(std::to_string(toAdd));
     }
