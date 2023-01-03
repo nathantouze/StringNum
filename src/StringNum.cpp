@@ -5,7 +5,7 @@
 
 
 
-const unsigned int &StringNum::length() const {
+const unsigned int StringNum::length() const {
     return _numberStr.length();
 }
 
@@ -100,7 +100,7 @@ void StringNum::assign(const std::string &number) {
     updateOutOfRange();
 }
 
-const unsigned long long int &StringNum::toLong() const {
+const unsigned long long int StringNum::toLong() const {
     return _numberLong;
 }
 
@@ -160,7 +160,8 @@ std::string StringNum::removeLeadingZeros(const std::string &number) {
 
 StringNum::StringNum(const int &number) 
 {
-    assign(long long int (number));
+    const long long int numberLong = number;
+    assign(numberLong);
     if (_numberStr == "") {
         _numberStr = "0";
     }

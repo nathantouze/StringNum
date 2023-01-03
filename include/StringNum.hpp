@@ -26,8 +26,8 @@ class StringNum {
         bool isNegative() const;
         bool isEven() const;
         const std::string &toString() const;
-        const unsigned long long int &toLong() const;
-        const unsigned int &length() const;
+        const unsigned long long int toLong() const;
+        const unsigned int length() const;
         void assign(const unsigned long long int &number);
         void assign(const long long int &number);
         void assign(const std::string &number);
