@@ -1,6 +1,11 @@
 #include <gtest/gtest.h>
 #include "../include/StringNum.hpp"
 
+
+TEST(StringNumStatic, REMOVE_LEADING_ZEROS) {
+    ASSERT_EQ(StringNum::removeLeadingZeros("00"), "0");
+}
+
 TEST(StringNumTests, ADD_SIMPLE) {
     StringNum number = StringNum(std::string("1"));
     ASSERT_EQ((number + 1).toString(), StringNum("2").toString());
@@ -127,4 +132,114 @@ TEST(StringNumTests, MUL_SECOND_NEG) {
 TEST(StringNumTests, MUL_BOTH_NEG) {
     StringNum number = -23986345;
     ASSERT_EQ((number * -10).toString(), StringNum("239863450").toString());
+}
+
+TEST(StringNumTests, DIV_SIMPLE) {
+    StringNum number = 16;
+    ASSERT_EQ((number / 2).toString(), StringNum("8").toString());
+}
+
+TEST(StringNumTests, DIV_ONE_POS) {
+    StringNum number = 987652123456;
+    ASSERT_EQ((number / 1).toString(), StringNum("987652123456").toString());
+}
+
+TEST(StringNumTests, DIV_ONE_NEG) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number / -1).toString(), StringNum("-23986345").toString());
+}
+
+TEST(StringNumTests, DIV_ZERO) {
+    StringNum number = 0;
+    ASSERT_EQ((number / 1245).toString(), StringNum("0").toString());
+}
+
+TEST(StringNumTests, DIV_MORE_THAN_TEN) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number / 11).toString(), StringNum("2180576").toString());
+}
+
+TEST(StringNumTests, DIV_NEW_DOZEN) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number / 10).toString(), StringNum("2398634").toString());
+}
+
+TEST(StringNumTests, DIV_FIRST_NEG) {
+    StringNum number = -23986345;
+    ASSERT_EQ((number / 10).toString(), StringNum("-2398634").toString());
+}
+
+TEST(StringNumTests, DIV_SECOND_NEG) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number / -10).toString(), StringNum("-2398634").toString());
+}
+
+TEST(StringNumTests, DIV_BOTH_NEG) {
+    StringNum number = -23986345;
+    ASSERT_EQ((number / -10).toString(), StringNum("2398634").toString());
+}
+
+TEST(StringNumTests, DIV_HARD) {
+    StringNum number = 1400574;
+    ASSERT_EQ((number / 14).toString(), StringNum("100041").toString());
+}
+
+TEST(StringNumTests, MOD_SIMPLE) {
+    StringNum number = 16;
+    ASSERT_EQ((number % 2).toString(), StringNum("0").toString());
+}
+
+TEST(StringNumTests, MOD_ONE_POS) {
+    StringNum number = 987652123456;
+    ASSERT_EQ((number % 1).toString(), StringNum("0").toString());
+}
+
+TEST(StringNumTests, MOD_ONE_NEG) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number % -1).toString(), StringNum("0").toString());
+}
+
+TEST(StringNumTests, MOD_ZERO) {
+    StringNum number = 0;
+    ASSERT_EQ((number % 1245).toString(), StringNum("0").toString());
+}
+
+TEST(StringNumTests, MOD_MORE_THAN_TEN) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number % 11).toString(), StringNum("9").toString());
+}
+
+TEST(StringNumTests, MOD_NEW_DOZEN) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number % 10).toString(), StringNum("5").toString());
+}
+
+TEST(StringNumTests, MOD_FIRST_NEG) {
+    StringNum number = -23986345;
+    ASSERT_EQ((number % 10).toString(), StringNum("-5").toString());
+}
+
+TEST(StringNumTests, MOD_SECOND_NEG) {
+    StringNum number = 23986345;
+    ASSERT_EQ((number % -10).toString(), StringNum("5").toString());
+}
+
+TEST(StringNumTests, MOD_BOTH_NEG) {
+    StringNum number = -23986345;
+    ASSERT_EQ((number % -10).toString(), StringNum("-5").toString());
+}
+
+TEST(StringNumTests, MOD_HARD) {
+    StringNum number = 1400574;
+    ASSERT_EQ((number % 14).toString(), StringNum("0").toString());
+}
+
+TEST(StringNumTests, MOD_SIMPLE_POS_NEG) {
+    StringNum number = 5;
+    ASSERT_EQ((number % -3).toString(), StringNum("2").toString());
+}
+
+TEST(StringNumTests, MOD_SIMPLE_NEG_POS) {
+    StringNum number = -5;
+    ASSERT_EQ((number % 3).toString(), StringNum("-2").toString());
 }

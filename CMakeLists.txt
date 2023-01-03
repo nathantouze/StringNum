@@ -25,35 +25,10 @@ set(Sources
     src/operators/PlusPlus.cpp
     src/operators/Minus.cpp
     src/operators/Multiply.cpp
+    src/operators/Divide.cpp 
+    src/operators/Modulo.cpp
 )
 
 add_library(${This} STATIC ${Sources} ${Headers})
 
 add_subdirectory(test)
-
-
-# add_executable(StringNum)
-
-# set(SRC ./src)
-# set(INCLUDE ./include)
-
-# enable_testing()
-# add_subdirectory(googletest)
-# add_subdirectory(test)
-
-# target_sources(StringNum PUBLIC
-#     ${SRC}/main.cpp
-#     ${SRC}/StringNum.cpp
-#     ${SRC}/operators/BooleanOperators.cpp
-#     ${SRC}/operators/Plus.cpp
-#     ${SRC}/operators/Minus.cpp
-# )
-
-# target_include_directories(StringNum PUBLIC
-#     ${INCLUDE}/
-# )
-
-# target_compile_options(StringNum PUBLIC
-#     $<$<CXX_COMPILER_ID:MSVC>:/W3 /MD -D_WIN32_WINNT=0x0A00 /D_ITERATOR_DEBUG_LEVEL=0 /permissive- /std:c++17>
-#     $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>: -Wall -Werror -fPIC -ldl -O3 -g>
-# )

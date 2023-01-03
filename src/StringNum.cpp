@@ -4,6 +4,11 @@
 #include <iostream>
 
 
+
+const unsigned int &StringNum::length() const {
+    return _numberStr.length();
+}
+
 /*
     Set new sign to the number
 */
@@ -76,127 +81,6 @@ bool StringNum::isNegative() const {
     return this->_numberStr[0] == '-';
 }
 
-
-void StringNum::divide(const int &divider) {
-
-    std::string dividerStr = std::to_string(divider);
-    std::string tmpNumberStr = _numberStr.substr(0, 1);
-    std::string result;
-    int tmpNumber;
-    int rest = 0;
-    int toSubtract = 0;
-    int toSkip = 0;
-
-
-    for (int i = 0; std::string::size_type(i) < _numberStr.length(); i += toSkip) {
-        toSkip = 1;
-        tmpNumberStr = rest == 0 ? _numberStr.substr(i, 1) : std::to_string(rest) + _numberStr.substr(i, 1);
-        for (int k = 2, tmp = std::stoi(tmpNumberStr); tmp < divider && tmp != 0; k++, tmp = std::stoi(tmpNumberStr)) {
-            tmpNumberStr = rest == 0 ? _numberStr.substr(i, k) : std::to_string(rest) + _numberStr.substr(i, k);
-            toSkip += 1;
-            if (std::string::size_type(i + k) > _numberStr.length()) {
-                break;
-            }
-        }
-        tmpNumber = std::stoi(tmpNumberStr);
-        for (int k = 10; k >= 0; k--) {
-            toSubtract = k * divider;
-            if (toSubtract <= tmpNumber) {
-                result.append(std::to_string(k));
-                break;
-            }
-        }
-        rest = tmpNumber - toSubtract;
-    }
-    if (rest > 0) {
-        result = add(result, 1);
-    }
-    assign(result);
-}
-
-std::string StringNum::add(std::string str, int num) const {
-    int toAdd = 0;
-    int tmp = 0;
-    std::string newVal;
-
-    for (int i = str.length() - 1; i >= 0; i--) {
-        if ((std::size_t)i == str.length() - 1) {
-            tmp = std::stoi(str.substr(i, 1)) + num;
-            toAdd = (tmp - tmp % 10) / 10;
-            newVal.append(std::to_string(tmp % 10));
-            
-        } else {
-            if (toAdd == 0) {
-                newVal += str.at(i);
-            } else {
-                tmp = std::stoi(str.substr(i, 1)) + toAdd;
-                toAdd = (tmp - tmp % 10) / 10;
-                if (i == 0) {
-                    std::string last = std::to_string(tmp);
-                    std::reverse(last.begin(), last.end());
-                    newVal.append(last);
-                } else {
-                    newVal.append(std::to_string(tmp % 10));
-                }
-            }
-        }
-    }
-    std::reverse(newVal.begin(), newVal.end());
-    return newVal;
-}
-
-
-void StringNum::add(const int &num) {
-    int toAdd = 0;
-    int tmp = 0;
-    std::string newVal;
-
-    for (int i = _numberStr.length() - 1; i >= 0; i--) {
-        if ((std::size_t)i == _numberStr.length() - 1) {
-            tmp = std::stoi(_numberStr.substr(i, 1)) + num;
-            toAdd = (tmp - tmp % 10) / 10;
-            newVal.append(std::to_string(tmp % 10));
-            
-        } else {
-            if (toAdd == 0) {
-                newVal += _numberStr.at(i);
-            } else {
-                tmp = std::stoi(_numberStr.substr(i, 1)) + toAdd;
-                toAdd = (tmp - tmp % 10) / 10;
-                if (i == 0) {
-                    std::string last = std::to_string(tmp);
-                    std::reverse(last.begin(), last.end());
-                    newVal.append(last);
-                } else {
-                    newVal.append(std::to_string(tmp % 10));
-                }
-            }
-        }
-    }
-    std::reverse(newVal.begin(), newVal.end());
-    assign(newVal);
-}
-
-void StringNum::multiply(const int &product) {
-    int toAdd = 0;
-    int tmp = 0;
-    std::string newVal;
-
-    for (int i = _numberStr.length() - 1; i >= 0; i--) {
-        tmp = (std::stoi(_numberStr.substr(i, 1)) * product) + toAdd;
-        toAdd = (tmp - tmp % 10) / 10;
-        if (i == 0) {
-            std::string last = std::to_string(tmp);
-            std::reverse(last.begin(), last.end());
-            newVal.append(last);
-        } else {
-            newVal.append(std::to_string(tmp % 10));
-        }
-    }
-    std::reverse(newVal.begin(), newVal.end());
-    assign(newVal);
-}
-
 void StringNum::assign(const long long int &number) {
     _numberLong = number;
     _numberStr = std::to_string(number);
@@ -243,6 +127,37 @@ const bool &StringNum::isOutOfRange() const {
 }
 
 
+unsigned int StringNum::countLeadingZeros(const std::string &number) {
+    
+    unsigned int result = 0;
+
+    int idx_rm = 0;
+    if (number.at(0) == '-') {
+        idx_rm = 1;
+    }
+    for (std::size_t i = idx_rm; i < number.length(); i++) {
+        if (number.at(i) == '0') {
+            result++;
+        } else {
+            break;
+        }
+    }
+    return result;
+}
+
+std::string StringNum::removeLeadingZeros(const std::string &number) {
+    std::string result = number;
+
+    int idx_rm = 0;
+    if (result.at(0) == '-') {
+        idx_rm = 1;
+    }
+    while (result.length() > idx_rm + 1 && result.at(idx_rm) == '0') {
+        result = result.replace(idx_rm, 1, "");
+    }
+    return result;
+}
+
 StringNum::StringNum(const int &number) 
 {
     assign(long long int (number));
@@ -272,10 +187,11 @@ StringNum::StringNum(const unsigned long long int &number)
 
 StringNum::StringNum(const std::string &number)
 {
-    if (!isValidString(number)) {
-        throw std::invalid_argument("\"" + number + "\" is not a valid string number");
+    std::string cleanStr = removeLeadingZeros(number);
+    if (!isValidString(cleanStr)) {
+        throw std::invalid_argument("'" + number + "' is not a valid string number");
     }
-    assign(number);
+    assign(cleanStr);
     if (_numberStr == "") {
         _numberStr = "0";
     }

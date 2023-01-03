@@ -1,9 +1,9 @@
 #include "../../include/StringNum.hpp"
 #include <stdexcept>
-
+#include <iostream>
 
 bool StringNum::operator>=(const StringNum &other) const {
-    if (this > &other || this == &other) {
+    if (*this > other.toString() || *this == other.toString()) {
         return true;
     } else {
         return false;
@@ -119,7 +119,7 @@ bool StringNum::operator>(const StringNum &other) const {
 
 
 bool StringNum::operator<=(const StringNum &other) const {
-    if (this < &other || this == &other) {
+    if (*this < other.toString() || *this == other.toString()) {
         return true;
     } else {
         return false;
@@ -153,8 +153,9 @@ bool StringNum::operator<(const unsigned long long int &other) const {
 bool StringNum::operator<(const std::string &other) const {
     
     if (!isValidString(other)) {
-        throw std::invalid_argument("\"" + other + "\" is not a valid string number");
+        throw std::invalid_argument("'" + other + "' is not a valid string number");
     }
+
     if (this->isNegative() && !isNegative(other)) {
         return true;
     }

@@ -18,20 +18,19 @@ class StringNum {
         StringNum(const int &number);
         ~StringNum();
 
+        static std::string removeLeadingZeros(const std::string &str);
+        static unsigned int countLeadingZeros(const std::string &str);
+
         void setNegative(bool negative);
         bool isNegative(const std::string &number) const;
         bool isNegative() const;
         bool isEven() const;
         const std::string &toString() const;
         const unsigned long long int &toLong() const;
+        const unsigned int &length() const;
         void assign(const unsigned long long int &number);
         void assign(const long long int &number);
         void assign(const std::string &number);
-        void multiply(const int &product);
-        void add(const int &num);
-        std::string add(std::string str, int num) const;
-        void divide(const int &divider);
-        void modulo(const int &divider);
 
         // Operators overloading
         bool operator>(const StringNum &other) const;
@@ -96,7 +95,14 @@ class StringNum {
         StringNum operator/(const long long int &other) const;
         StringNum operator/(const unsigned long long int &other) const;
         
-        
+        StringNum operator%(const StringNum &other) const;
+        StringNum operator%(const std::string &other) const;
+        StringNum operator%(const short &other) const;
+        StringNum operator%(const int &other) const;
+        StringNum operator%(const unsigned int &other) const;
+        StringNum operator%(const long &other) const;
+        StringNum operator%(const long long int &other) const;
+        StringNum operator%(const unsigned long long int &other) const;
 
         const bool &isOutOfRange() const;
     protected:
